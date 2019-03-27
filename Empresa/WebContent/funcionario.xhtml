@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>Funcionário</title>
+</h:head> 
+<body> 
+	<h2>Funcionario CRUD</h2>
+	<h4>Criar novo</h4>
+	<h:form>
+		Nome: <h:inputText value="#{funcionarioBean.name}" /><br/>
+		Salario: <h:inputText value="#{funcionarioBean.salario}" /><br/>
+		<h:commandButton action="#{funcionarioBean.createNewFuncionario()}" value="Criar novo" />
+		#{funcionarioBean.ultimoIdCriado}
+	</h:form>
+</body> 
+</html>

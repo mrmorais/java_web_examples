@@ -6,7 +6,7 @@
 
 <h:head>Listando Employees</h:head>
 <body>
-	<h:dataTable value="#{employeeManagedBean.employeeList}" var="emp"
+	<h:dataTable value="#{employeeManagedBean.model}" var="emp"
 		border="1">
 		<h:column>
 			<f:facet name="header">
@@ -36,7 +36,7 @@
 			<f:facet name="header">
 				<h:outputText value="Remover" />
 			</f:facet>
-			<h:commandButton action="#{employeeManagedBean.removeEmployee}" value="Removera" />
+			<h:commandLink action="#{employeeManagedBean.delete}" value="Removera" />
 		</h:column>
 	<!-- <h:column>
 			<f:facet name="header">

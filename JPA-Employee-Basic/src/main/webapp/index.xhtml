@@ -1,14 +1,33 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
-
-<h:head></h:head> 
-<body> 
-	<h:form>
-		<h:link outcome="employeenew.xhtml" value="Add new employee"/>
-		<h:link outcome="employeelist.xhtml" value="List employees"/>
-	</h:form>
-</body> 
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Employee</title>
+    </h:head>
+    <h:body>
+        <h3>Lista de Empregados</h3>
+        <h:form rendered="#{not empty employeeMB.list}" id="empform">
+            <h:dataTable value="#{employeeMB.list}" var="item">
+                <h:column><f:facet name="header">Nome</f:facet>#{item.name}</h:column>
+                <h:column><f:facet name="header">Nascimento</f:facet>#{item.dob}</h:column>
+                <h:column><h:commandButton value="delete" action="#{employeeMB.delete(item)}"/></h:column>
+            </h:dataTable>
+        </h:form>
+        <h:panelGroup rendered="#{empty employeeMB.list}">
+            <p>A tabela está vazia.</p>
+        </h:panelGroup>
+        <h:panelGroup>
+            <h3>Adicionar novo</h3>
+            <h:form>
+                <p>Nome: <h:inputText value="#{employeeMB.item.name}" /></p>
+                <p>Nascimento: 
+                	<h:inputText value="#{employeeMB.item.dob}">
+                		<f:convertDateTime pattern="dd/mm/yyyy"/>
+                	</h:inputText>
+                </p>
+                <p><h:commandButton value="Adicionar" action="#{employeeMB.add}" /></p>
+            </h:form>
+        </h:panelGroup>
+    </h:body>
 </html>

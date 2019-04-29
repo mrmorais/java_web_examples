@@ -41,7 +41,8 @@ public class EmployeeDAO {
 	public void removeEmployee(Employee employee) {
 		try {
 			userTransaction.begin();
-			entityManager.remove(employee);
+			Object c = entityManager.merge(employee);
+			entityManager.remove(c);
 			userTransaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();

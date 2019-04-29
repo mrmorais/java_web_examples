@@ -142,5 +142,9 @@ public class Employee {
 	         return false;
 	      return true;
 	   }
+	   
+	   public void removeEmployee() {
+		   System.out.println("Testing");
+	   }
 
 }

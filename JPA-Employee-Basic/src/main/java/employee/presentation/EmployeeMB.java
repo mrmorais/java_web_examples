@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
+//import javax.faces.bean.ManagedBean;
+//import javax.faces.bean.ViewScoped;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -14,52 +16,39 @@ import javax.inject.Named;
 import employee.Employee;
 import employee.data.EmployeeDAO;
 
-@Named(value = "employeeManagedBean")
-//@ViewScoped
-@RequestScoped
+@Named
+@ViewScoped
 public class EmployeeMB implements Serializable {
-	private static final long serialVersionUID = -1072401845049198412L;
 
-	@Inject EmployeeDAO dao;
-	
-	//Auxiliary fields for JSF
-	private List<Employee> employeeList = new ArrayList<>();
-	private Employee employee = new Employee();
-	
-	public List<Employee> getEmployeeList() {
-		System.out.println("listar usuariosa");
-		employeeList = dao.findEmployees();
-		return employeeList;
-	}
-	
-	@PostConstruct
-	public void init() {
-		employeeList = dao.findEmployees();
-	}
+    private List<Employee> list;
+    private Employee item;
+    
+    @Inject EmployeeDAO dao;
 
-	public void setEmployeeList(List<Employee> employeeList) {
-		this.employeeList = employeeList;
-	}
+    @PostConstruct
+    public void init() {
+        list = dao.findEmployees();
+        item = new Employee();
+    }
+    
+    public String add() {
+        dao.addNew(item);
+        // Actually, the DAO should already have set the ID from DB. This is just for demo.
+        return "index";
+    }
+    
+    public String delete(Employee employee) {
+    	dao.removeEmployee(employee);
+    	return "index";
+    }
 
-	public Employee getEmployee() {
-		return employee;
-	}
+    public List<Employee> getList() {
+        return list;
+    }
+    
+    public Employee getItem() {
+    	return this.item;
+    }
 
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
 
-	public String addNewEmployee() {
-		dao.addNew(employee);
-		employeeList = dao.findEmployees();
-		return "employeelist";
-	}
-	
-	public String removeEmployee() {
-		System.out.println("remover usuario");
-//		dao.removeEmployee(employee);
-//		employeeList = dao.findEmployees();
-		return "employeelist";
-	}
-	
 }

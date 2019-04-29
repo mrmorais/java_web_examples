@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.ufrn.imd.web2</groupId>
+	<artifactId>Encryption-EAR</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>ear</packaging>
+	
+	<dependencies>
+        <dependency>
+            <groupId>br.ufrn.imd.web2</groupId>
+            	<artifactId>Encryption-WebClient</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
+        
+        <dependency>
+            <groupId>br.ufrn.imd.web2</groupId>
+			<artifactId>Encryption-Bean</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+            <type>ejb</type>
+        </dependency>
+    </dependencies>
+    
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>2.10</version>
+				<configuration>
+					<version>7</version>
+					<modules>
+						<webModule>
+							<groupId>br.ufrn.imd.web2</groupId>
+							<artifactId>Encryption-WebClient</artifactId>
+						</webModule>
+						<ejbModule>
+							<groupId>br.ufrn.imd.web2</groupId>
+							<artifactId>Encryption-Bean</artifactId>
+						</ejbModule>
+					</modules>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
